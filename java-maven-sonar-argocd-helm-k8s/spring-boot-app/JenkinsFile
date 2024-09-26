@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      image 'ajaykumarkc0301/maven-docker-agent:v1'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
@@ -70,20 +70,4 @@ pipeline {
       }
     }
   }
-  post {
-    failure {
-      emailext(
-        subject: "Build Failed: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-        body: "The build for ${env.JOB_NAME} [${env.BUILD_NUMBER}] has failed. Please check the Jenkins console output for details.",
-        to: "ajaykumarkc03@gmail.com"
-      )
-    }
-    success {
-      emailext(
-        subject: "Build Success: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-        body: "Congratulations!! The build for ${env.JOB_NAME} [${env.BUILD_NUMBER}] was successful.",
-        to: "ajaykumarkc03@gmail.com"
-      )
-    }
-  }
-}
+ 
